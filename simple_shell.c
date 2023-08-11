@@ -10,15 +10,49 @@
 
 int main(int argc, char **argv, char **env)
 {
-	int tweak;
+	// char *path_var = get_path(env);
+	// int i = 0;
 
-	tweak = printf("Hello World!\n");
+	// // char **array_tokens = split_path("stephen:tracy:blessing:faith:joy:aise:osariemen:mummy");
+	// char **array_tokens = split_path(path_var);
 
-	if (tweak > 0)
+	// while (array_tokens[i] != NULL)
+	// {
+	// 	printf("%s\n", array_tokens[i]);
+	// 	i++;
+	// }
+
+	if (isatty(STDIN_FILENO) == 1)
 	{
-		perror("error occured");
-		return (EXIT_FAILURE);
+		while (1)
+		{
+			write(1, "$ ", 2);
+			handle_interactive_mode(argv, env);
+		}
+	}
+	else
+	{
+		handle_non_interactive_mode(argv, env);
 	}
 
+	// free_array_tokens(array_tokens);
 	return (0);
+}
+
+/**
+ * free_array_tokens - frees an array of strings
+ * @array_tokens: Argument pointer to grid to be freed
+ * Return: Always Void;
+ */
+
+void free_array_tokens(char **array_tokens)
+{
+	int i = 0;
+	while (array_tokens[i] != NULL)
+	{
+		free(array_tokens[i]);
+		i++;
+	}
+
+	free(array_tokens);
 }
