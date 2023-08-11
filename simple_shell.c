@@ -10,18 +10,6 @@
 
 int main(int argc, char **argv, char **env)
 {
-	// char *path_var = get_path(env);
-	// int i = 0;
-
-	// // char **array_tokens = split_path("stephen:tracy:blessing:faith:joy:aise:osariemen:mummy");
-	// char **array_tokens = split_path(path_var);
-
-	// while (array_tokens[i] != NULL)
-	// {
-	// 	printf("%s\n", array_tokens[i]);
-	// 	i++;
-	// }
-
 	if (isatty(STDIN_FILENO) == 1)
 	{
 		while (1)

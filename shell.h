@@ -35,6 +35,6 @@ char **split_user_input(char *user_input);
 /*Main program functions*/
 void handle_interactive_mode(char **argv, char **env);
 void handle_non_interactive_mode(char **argv, char **env);
-char **process_input(char **argv, char **env);
+char **process_input(char **argv); /*File inside handle-non_interactive*/
 
 #endif /*SHELL_H*/
