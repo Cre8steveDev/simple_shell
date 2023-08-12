@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 /**
- * handle_non_interactive - Function that handles the interactive mode
+ * handle_non_interactive_mode - Function that handles the interactive mode
+ * @argv: Argument from command line with program name
  * @env: Environment variable received from main
  * Return: Void
  */
@@ -13,13 +14,15 @@ void handle_non_interactive_mode(char **argv, char **env)
 	pid_t pid_val;
 	int execve_val;
 
-	if ((pid_val = fork()) == -1)
+	pid_val = fork();
+	if (pid_val == -1)
 		free_array_tokens(token_array),
 			perror(argv[0]),
 			exit(EXIT_FAILURE);
 	else if (pid_val == 0)
 	{
-		if ((execve_val = execve(token_array[0], token_array, env)) == -1)
+		execve(token_array[0], token_array, env);
+		if (execve_val == -1)
 			free_array_tokens(token_array),
 				perror(argv[0]), exit(EXIT_FAILURE);
 	}
@@ -27,5 +30,4 @@ void handle_non_interactive_mode(char **argv, char **env)
 		wait(NULL);
 
 	free_array_tokens(token_array);
-	return;
 }

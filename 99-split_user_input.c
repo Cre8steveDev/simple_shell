@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * split_path - Splits the environment variable path
+ * split_user_input - Splits the user input into tokens
  * and returns a pointer to a dynamically allocated array
  * of strings - NULL terminated
  * @user_input: String of user input delimited by " \n\t\r" to be plit

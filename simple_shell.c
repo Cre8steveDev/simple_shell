@@ -23,7 +23,6 @@ int main(int argc, char **argv, char **env)
 		handle_non_interactive_mode(argv, env);
 	}
 
-	// free_array_tokens(array_tokens);
 	return (0);
 }
 
@@ -36,6 +35,7 @@ int main(int argc, char **argv, char **env)
 void free_array_tokens(char **array_tokens)
 {
 	int i = 0;
+
 	while (array_tokens[i] != NULL)
 	{
 		free(array_tokens[i]);
