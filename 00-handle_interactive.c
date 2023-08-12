@@ -14,7 +14,10 @@ void handle_interactive_mode(char **argv, char **env)
 	pid_t pid_val;
 	int execve_val;
 
-	pid_val = fork() == -1;
+	if (token_array[0] == NULL || token_array == NULL)
+		return;
+
+	pid_val = fork();
 	if (pid_val == -1)
 		free_array_tokens(token_array),
 			perror(argv[0]),
@@ -27,7 +30,8 @@ void handle_interactive_mode(char **argv, char **env)
 				perror(argv[0]), exit(EXIT_FAILURE);
 	}
 	else
+	{
 		wait(NULL);
-
-	free_array_tokens(token_array);
+		free_array_tokens(token_array);
+	}
 }

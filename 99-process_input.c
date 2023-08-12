@@ -18,8 +18,8 @@ char **process_input(char **argv)
 
 	string_read = getline(&user_string, &stringBuffSize, stdin);
 	if (string_read < 0)
-		free(user_string), perror(argv[0]),
-			exit(EXIT_FAILURE);
+		free(user_string), write(1, "\n", 1),
+			exit(EXIT_SUCCESS);
 
 	token_array = split_user_input(user_string);
 
