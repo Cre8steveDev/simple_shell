@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+#Gitignore itself
+.gitignore
+
 # Object files
 *.o
 *.ko
