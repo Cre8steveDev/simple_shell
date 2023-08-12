@@ -14,10 +14,21 @@ void handle_interactive_mode(char **argv, char **env)
 	pid_t pid_val;
 	int execve_val;
 
+	signal(SIGINT, handle_signal);
 	if (token_array[0] == NULL || token_array == NULL)
 		return;
+	/*Tests if token 0 is any of the builtins then returns 0 or 1 for no or yes.
+	if (handle_builtins(argv, env, token_array))
+		return;
+	*/
+	if (access(token_array[0], F_OK) == -1)
+	{
+		perror(argv[0]), free_array_tokens(token_array);
+		return; /*exit(EXIT_SUCCESS);*/
+	}
+	else
+		pid_val = fork();
 
-	pid_val = fork();
 	if (pid_val == -1)
 		free_array_tokens(token_array),
 			perror(argv[0]),

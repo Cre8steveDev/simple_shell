@@ -15,12 +15,16 @@ int main(int argc, char **argv, char **env)
 		while (1)
 		{
 			write(1, "$ ", 2);
+
 			handle_interactive_mode(argv, env);
 		}
 	}
 	else
 	{
-		handle_non_interactive_mode(argv, env);
+		while (1)
+		{
+			handle_non_interactive_mode(argv, env);
+		}
 	}
 
 	return (0);

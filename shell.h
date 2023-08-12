@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 
 /*Custom String Function Prototypes*/
 int _strlen(char *s);
@@ -31,10 +32,14 @@ void free_array_tokens(char **array_tokens);
 char *get_path(char **env);
 char **split_path(char *path_var);
 char **split_user_input(char *user_input);
+void handle_signal(int signum);
+int handle_builtins(char **argv, char **env, char **token_array);
 
 /*Main program functions*/
 void handle_interactive_mode(char **argv, char **env);
 void handle_non_interactive_mode(char **argv, char **env);
 char **process_input(char **argv); /*File inside handle-non_interactive*/
+
+
 
 #endif /*SHELL_H*/

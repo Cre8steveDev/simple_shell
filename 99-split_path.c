@@ -36,12 +36,11 @@ char **split_path(char *path_var)
 
 	temp_tok = strtok(temp_path, ":");
 	token_array[i] = _strdup(temp_tok);
+
 	while (temp_tok != NULL)
-	{
-		i++;
-		temp_tok = strtok(NULL, ":");
-		token_array[i] = _strdup(temp_tok);
-	}
+		i++, temp_tok = strtok(NULL, ":"),
+			 token_array[i] = _strdup(temp_tok);
+
 	token_array[i] = NULL;
 
 	free(temp_path);
