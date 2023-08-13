@@ -12,6 +12,10 @@ int handle_builtins(char **argv, char **env, char **token_array)
 {
 	int status = 0;
 
+	(void)argv;
+	(void)env;
+	(void)token_array;
+
 	/**
 	 * Check if token_array[0] matches any of the
 	 * implemented builtins cd, env, exit

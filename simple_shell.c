@@ -10,21 +10,23 @@
 
 int main(int argc, char **argv, char **env)
 {
-	if (isatty(STDIN_FILENO) == 1)
+	/**
+	 * Create a variable here that is passed to the
+	 * interactive function and keeps track to increment
+	 * the variable here at every call
+	 * int cmd_count = 0;
+	 */
+	int cmd_count = 1;
+
+	(void)argc;
+
+	while (1)
 	{
-		while (1)
-		{
+		if (isatty(STDIN_FILENO) == 1)
 			write(1, "$ ", 2);
 
-			handle_interactive_mode(argv, env);
-		}
-	}
-	else
-	{
-		while (1)
-		{
-			handle_non_interactive_mode(argv, env);
-		}
+		handle_interactions(argv, env, &cmd_count);
+		cmd_count++;
 	}
 
 	return (0);

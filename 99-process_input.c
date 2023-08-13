@@ -9,17 +9,20 @@
 
 char **process_input(char **argv)
 {
-	char *path_variable = NULL, *user_string = NULL, *token = NULL;
+	char *user_string = NULL;
 	char **token_array = NULL;
 	ssize_t string_read;
 	size_t stringBuffSize = 0;
-	pid_t pid_val;
-	int execve_val;
 
+	signal(SIGINT, handle_signal);
 	string_read = getline(&user_string, &stringBuffSize, stdin);
 	if (string_read < 0)
-		free(user_string), write(1, "\n", 1),
-			exit(EXIT_SUCCESS);
+	{
+		free(user_string);
+		if (isatty(0) == 1)
+			write(1, "\n", 2);
+		exit(EXIT_SUCCESS);
+	}
 
 	token_array = split_user_input(user_string);
 

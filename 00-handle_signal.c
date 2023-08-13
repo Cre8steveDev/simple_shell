@@ -8,4 +8,5 @@
 
 void handle_signal(int signum)
 {
+	(void)signum;
 }

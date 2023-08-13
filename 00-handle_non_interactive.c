@@ -21,7 +21,7 @@ void handle_non_interactive_mode(char **argv, char **env)
 			exit(EXIT_FAILURE);
 	else if (pid_val == 0)
 	{
-		execve(token_array[0], token_array, env);
+		execve_val = execve(token_array[0], token_array, env);
 		if (execve_val == -1)
 			free_array_tokens(token_array),
 				perror(argv[0]), exit(EXIT_FAILURE);

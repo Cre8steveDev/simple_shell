@@ -13,7 +13,6 @@ char **split_path(char *path_var)
 	char **token_array = NULL;
 	int token_num = 0, i = 0;
 	char *temp_path = _strdup(path_var), *temp_tok;
-	char *dummy = "Hello";
 
 	if (temp_path != NULL)
 	{
