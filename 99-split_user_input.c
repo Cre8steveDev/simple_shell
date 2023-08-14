@@ -27,13 +27,15 @@ char **split_user_input(char *user_input)
 	if (token_array == NULL)
 	{
 		perror("Error allocating memory for tokens.");
-		free(temp_path);
+		free(temp_path), free(token_array);
 		exit(EXIT_FAILURE);
 	}
+
 	free(temp_path);
 	temp_path = _strdup(user_input);
 	temp_tok = strtok(temp_path, DELIM);
 	token_array[i] = _strdup(temp_tok);
+
 	while (temp_tok != NULL)
 	{
 		i++;
@@ -42,7 +44,6 @@ char **split_user_input(char *user_input)
 			token_array[i] = _strdup(temp_tok);
 	}
 	token_array[i] = NULL;
-
 	free(temp_path);
 	return (token_array);
 }

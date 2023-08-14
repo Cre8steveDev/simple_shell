@@ -20,7 +20,7 @@ char **process_input(char **argv)
 	{
 		free(user_string);
 		if (isatty(0) == 1)
-			write(1, "\n", 2);
+			write(1, "\n", 1);
 		exit(EXIT_SUCCESS);
 	}
 
@@ -29,6 +29,7 @@ char **process_input(char **argv)
 	/*Modify split_user function to free token array when it fails*/
 	if (token_array == NULL)
 	{
+		free(user_string);
 		free_array_tokens(token_array);
 		perror(argv[0]);
 		exit(EXIT_FAILURE);

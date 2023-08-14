@@ -2,5 +2,13 @@
 /bin/ls
 /bin/ls /root
 /bin/ls ../
+
+
+
+
+
+
+
+
 /bin/cat tests.txt
 /bin/echo "Hello world"
