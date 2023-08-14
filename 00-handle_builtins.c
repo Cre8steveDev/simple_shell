@@ -5,12 +5,12 @@
  * @argv: Command line arguments
  * @env: Environment variables
  * @token_array: Tokenized user input
- * Return: status 1 on successfully finding command or 0 otherwise
+ * Return: status 1 on successfully finding command or -1 otherwise
  */
 
 int handle_builtins(char **argv, char **env, char **token_array)
 {
-	int status = 0;
+	int status = -1;
 
 	(void)argv;
 	(void)env;
