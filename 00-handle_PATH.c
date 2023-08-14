@@ -5,15 +5,17 @@
  * @argv: Commandline argument passed in for program name
  * @env: Environment variables
  * @token_array: For command and argument
+ * @cmd_count: Command count variable pointer (unused now)
  * Return: Returns -1 if it fails or 0 if it succeeds
  */
 
 int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count)
 {
 	char **paths_array = split_path(get_path(env)), *full_path;
-	int i = 0, len_str, execve_val;
+	int i = 0, len_str, execve_val, status = -1;
 	pid_t pid_val;
 
+	(void)cmd_count;
 	while (paths_array[i])
 	{
 		len_str = _strlen(paths_array[i]) + _strlen(token_array[0]) + 2;
@@ -22,29 +24,28 @@ int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count)
 		_strcat(full_path, "/");
 		_strcat(full_path, token_array[0]);
 
-		(void)cmd_count;
-
 		if (access(full_path, F_OK) == -1)
 		{
 			free(full_path), i++;
 			continue;
 		}
-		pid_val = fork();
-		if (pid_val == -1)
-			free_array_tokens(token_array), perror(argv[0]),
-				exit(EXIT_FAILURE);
-		else if (pid_val == 0)
-		{
-			execve_val = execve(full_path, token_array, env);
-			if (execve_val == -1)
-				free_array_tokens(token_array),
-					perror(argv[0]), exit(EXIT_FAILURE);
-		}
 		else
-			wait(NULL), free_array_tokens(token_array);
-		free(full_path), i++;
+		{
+			status = 1;
+			pid_val = fork();
+			if (pid_val == -1)
+				return (-1);
+			else if (pid_val == 0)
+			{
+				execve_val = execve(full_path, token_array, env);
+				if (execve_val == -1)
+					perror(argv[0]), exit(EXIT_FAILURE);
+			}
+			else
+				wait(NULL), free(full_path);
+			break;
+		}
 	}
 	free_array_tokens(paths_array);
-	free_array_tokens(token_array);
-	return (1);
+	return (status);
 }

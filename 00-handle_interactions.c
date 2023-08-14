@@ -32,10 +32,10 @@ void handle_interactions(char **argv, char **env, int *cmd_count)
 			free_array_tokens(token_array);
 			return; /*exit(EXIT_SUCCESS);*/
 		}
+		free_array_tokens(token_array);
 		return;
 	}
-	else
-		pid_val = fork();
+	pid_val = fork();
 
 	if (pid_val == -1)
 		free_array_tokens(token_array), perror(argv[0]),
