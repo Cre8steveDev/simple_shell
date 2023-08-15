@@ -13,7 +13,7 @@ char **split_user_input(char *user_input)
 	char **token_array = NULL;
 	int token_num = 0, i = 0;
 	char *temp_path = _strdup(user_input), *temp_tok;
-	char *DELIM = " \n\t\r";
+	char *DELIM = " \"\n\t\r";
 
 	if (temp_path != NULL)
 	{

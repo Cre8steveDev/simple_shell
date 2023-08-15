@@ -10,7 +10,9 @@
 
 void handle_non_interactive_mode(char **argv, char **env)
 {
-	char **token_array = process_input(argv);
+	int mode;
+
+	char **token_array = process_input(argv, mode);
 	pid_t pid_val;
 	int execve_val;
 

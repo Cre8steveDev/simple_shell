@@ -21,8 +21,14 @@
 typedef struct Built_in
 {
 	char *cmd;
-	int (*fnc_cmd)(char **argv, char **env, char **token_array);
+	void (*fnc_cmd)(char **argv, char **env, char **token_array);
 } Built_in;
+
+/* Builtin functions handler */
+
+void env_func(char **argv, char **env, char **token_array);
+void cd_func(char **argv, char **env, char **token_array);
+void exit_func(char **argv, char **env, char **token_array);
 
 /*Custom String Function Prototypes*/
 int _strlen(char *s);
@@ -40,6 +46,9 @@ char *_strdup(char *str);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void free_array_tokens(char **array_tokens);
 
+/*Global status*/
+int status;
+
 /*User-defined Prototypes*/
 char *get_path(char **env);
 char **split_path(char *path_var);
@@ -47,12 +56,13 @@ char **split_user_input(char *user_input);
 void handle_signal(int signum);
 int handle_builtins(char **argv, char **env, char **token_array);
 int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count);
+void handle_full_Path(char **token_array, char **env, char **argv);
 void err_msg(int fd, int num_cmd, char *s1, char *s2, char *s3);
 
 /*Main program functions*/
-void handle_interactions(char **argv, char **env, int *cmd_count);
-void handle_non_interactive_mode(char **argv, char **env);
-char **process_input(char **argv);
+void handle_interactions(char **argv, char **env, int *cmd_count, int *mode);
+/*void handle_non_interactive_mode(char **argv, char **env);*/
+char **process_input(char **argv, int *mode);
 /*File inside handle-non_interactive*/
 
 #endif /*SHELL_H*/

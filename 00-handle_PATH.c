@@ -42,7 +42,7 @@ int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count)
 					perror(argv[0]), exit(EXIT_FAILURE);
 			}
 			else
-				wait(NULL), free(full_path);
+				wait(&status), free(full_path);
 			break;
 		}
 	}

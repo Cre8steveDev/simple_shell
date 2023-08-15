@@ -17,15 +17,22 @@ int main(int argc, char **argv, char **env)
 	 * int cmd_count = 0;
 	 */
 	int cmd_count = 1;
+	int mode = 0;
 
 	(void)argc;
 
+	if (isatty(0) == 1)
+		mode = 1;
+	errno = 0;
+
 	while (1)
 	{
-		if (isatty(STDIN_FILENO) == 1)
+		if (mode == 1)
+		{
 			write(1, "$ ", 2);
+		}
 
-		handle_interactions(argv, env, &cmd_count);
+		handle_interactions(argv, env, &cmd_count, &mode);
 		cmd_count++;
 	}
 

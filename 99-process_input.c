@@ -4,10 +4,11 @@
  * process_input - processes user input, splits into tokens and
  * returns an array of strings to the caller
  * @argv: Commandline argument for name of program
+ * @mode: interative or not mode
  * Return: Array of strings
  */
 
-char **process_input(char **argv)
+char **process_input(char **argv, int *mode)
 {
 	char *user_string = NULL;
 	char **token_array = NULL;
@@ -19,9 +20,9 @@ char **process_input(char **argv)
 	if (string_read < 0)
 	{
 		free(user_string);
-		if (isatty(0) == 1)
+		if (*mode == 1)
 			write(1, "\n", 1);
-		exit(EXIT_SUCCESS);
+		exit(errno);
 	}
 
 	token_array = split_user_input(user_string);

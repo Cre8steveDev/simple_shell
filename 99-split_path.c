@@ -7,7 +7,6 @@
  * @path_var: String of directories delimited by : to be plit
  * Return: On Success array of strings char ** or NULL on fail
  */
-
 char **split_path(char *path_var)
 {
 	char **token_array = NULL;
@@ -27,7 +26,8 @@ char **split_path(char *path_var)
 	{
 		perror("Error allocating memory for tokens.");
 		free(temp_path);
-		exit(EXIT_FAILURE);
+		return (NULL);
+		/*exit(EXIT_FAILURE);*/
 	}
 	free(temp_path);
 
