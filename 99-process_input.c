@@ -22,7 +22,7 @@ char **process_input(char **argv, int *mode)
 		free(user_string);
 		if (*mode == 1)
 			write(1, "\n", 1);
-		exit(errno);
+		exit(EXIT_SUCCESS);
 	}
 
 	token_array = split_user_input(user_string);
