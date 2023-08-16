@@ -15,7 +15,7 @@ char *get_path(char **env)
 
 	while (env[i])
 	{
-		if (_strstr(env[i], "PATH") && env[i][0] == 'P')
+		if (_strstr(env[i], "PATH") && env[i][0] == 'P' && env[i][4] == '=')
 		{
 			path = env[i];
 			break;

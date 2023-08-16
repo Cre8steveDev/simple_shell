@@ -16,6 +16,9 @@ int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count)
 	pid_t pid_val;
 
 	(void)cmd_count;
+	if (paths_array == NULL)
+		return (-1);
+
 	while (paths_array[i])
 	{
 		len_str = _strlen(paths_array[i]) + _strlen(token_array[0]) + 2;
@@ -23,16 +26,14 @@ int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count)
 		_strcpy(full_path, paths_array[i]);
 		_strcat(full_path, "/");
 		_strcat(full_path, token_array[0]);
-
 		if (access(full_path, F_OK) == -1)
 		{
-			free(full_path), i++;
+			free(full_path), i++, errno = 127;
 			continue;
 		}
 		else
 		{
-			status = 1;
-			pid_val = fork();
+			status = 1, pid_val = fork();
 			if (pid_val == -1)
 				return (-1);
 			else if (pid_val == 0)
@@ -42,7 +43,7 @@ int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count)
 					perror(argv[0]), exit(EXIT_FAILURE);
 			}
 			else
-				wait(&status), free(full_path);
+				wait(&status), free(full_path), errno = status;
 			break;
 		}
 	}

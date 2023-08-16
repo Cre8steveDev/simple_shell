@@ -23,6 +23,7 @@ int main(int argc, char **argv, char **env)
 
 	if (isatty(0) == 1)
 		mode = 1;
+
 	errno = 0;
 
 	while (1)
@@ -36,7 +37,7 @@ int main(int argc, char **argv, char **env)
 		cmd_count++;
 	}
 
-	return (0);
+	return (errno);
 }
 
 /**

@@ -28,18 +28,24 @@ void handle_interactions(char **argv, char **env, int *cmd_count, int *mode)
 	/*Handling PATH for command run anywhere*/
 	if (access(token_array[0], F_OK) == -1)
 	{
+
 		if (handle_PATH(argv, env, token_array, cmd_count) == -1)
 		{
-			err_msg(2, *cmd_count, argv[0], token_array[0], "not found"),
-				free_array_tokens(token_array);
+			err_msg(2, *cmd_count, argv[0], token_array[0], "not found");
+			free_array_tokens(token_array);
+			if (*mode != 1)
+			{
+				exit(127);
+			}
 			errno = 127;
 			return; /*Error Status for when path not found*/
 		}
+
 		free_array_tokens(token_array);
 		return;
 	}
 	/* Handling absolute path or relative path*/
-	handle_full_Path(token_array, env, argv);
+	handle_full_Path(token_array, env, argv, *mode);
 }
 
 /**
@@ -47,13 +53,15 @@ void handle_interactions(char **argv, char **env, int *cmd_count, int *mode)
  * @token_array: Array of tokenized user input
  * @env: Environment variables
  * @argv: Access program name from command line
+ * @mode: Mode of interaction
  * Return: Void
  */
-void handle_full_Path(char **token_array, char **env, char **argv)
+void handle_full_Path(char **token_array, char **env, char **argv, int mode)
 {
 	pid_t pid_val;
 	int execve_val;
 
+	(void)mode;
 	pid_val = fork();
 
 	if (pid_val == -1)
@@ -68,5 +76,8 @@ void handle_full_Path(char **token_array, char **env, char **argv)
 		/*Error status for when execve fails*/
 	}
 	else
+	{
 		wait(&status), free_array_tokens(token_array);
+		errno = status;
+	}
 }

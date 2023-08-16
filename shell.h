@@ -56,7 +56,7 @@ char **split_user_input(char *user_input);
 void handle_signal(int signum);
 int handle_builtins(char **argv, char **env, char **token_array);
 int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count);
-void handle_full_Path(char **token_array, char **env, char **argv);
+void handle_full_Path(char **token_array, char **env, char **argv, int mode);
 void err_msg(int fd, int num_cmd, char *s1, char *s2, char *s3);
 
 /*Main program functions*/

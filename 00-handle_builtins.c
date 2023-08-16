@@ -45,8 +45,27 @@ int handle_builtins(char **argv, char **env, char **token_array)
 
 void exit_func(char **argv, char **env, char **token_array)
 {
+	int status2;
+
 	(void)argv;
 	(void)env;
+
+	/* ./hsh: 1: exit: Illegal number: HBTN */
+	/* ./hsh: 1: exit: Illegal number: -98 */
+
+	if (token_array[1])
+	{
+		status2 = atoi(token_array[1]);
+		free_array_tokens(token_array);
+		errno = status2;
+		exit(errno);
+	}
+
+	if (errno != 0)
+	{
+		free_array_tokens(token_array);
+		exit(2);
+	}
 
 	free_array_tokens(token_array);
 	exit(errno);

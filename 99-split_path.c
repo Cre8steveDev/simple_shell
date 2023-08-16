@@ -13,6 +13,9 @@ char **split_path(char *path_var)
 	int token_num = 0, i = 0;
 	char *temp_path = _strdup(path_var), *temp_tok;
 
+	if (path_var == NULL)
+		return (NULL);
+
 	if (temp_path != NULL)
 	{
 		temp_tok = strtok(temp_path, ":");
@@ -30,9 +33,7 @@ char **split_path(char *path_var)
 		/*exit(EXIT_FAILURE);*/
 	}
 	free(temp_path);
-
 	temp_path = _strdup(path_var);
-
 	temp_tok = strtok(temp_path, ":");
 	token_array[i] = _strdup(temp_tok);
 
@@ -41,7 +42,6 @@ char **split_path(char *path_var)
 			 token_array[i] = _strdup(temp_tok);
 
 	token_array[i] = NULL;
-
 	free(temp_path);
 	return (token_array);
 }
