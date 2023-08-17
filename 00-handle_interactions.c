@@ -12,7 +12,7 @@
 /**SUBJECT TO MODIFICATION IN NON-INTERACTIVE MODE*/
 void handle_interactions(char **argv, char **env, int *cmd_count, int *mode)
 {
-	char **token_array = process_input(argv, mode);
+	char **token_array = process_input(argv, mode), *in_path;
 
 	if (token_array[0] == NULL || token_array == NULL)
 	{
@@ -23,6 +23,19 @@ void handle_interactions(char **argv, char **env, int *cmd_count, int *mode)
 	{
 		free_array_tokens(token_array);
 		return;
+	}
+	/* Handle Missing Path*/
+	in_path = find_str_in_path(token_array[0], get_path(env));
+	if (token_array[0][0] != '/' && token_array[0][0] != '.' &&
+		token_array[1] == NULL &&
+		access(token_array[0], F_OK) != -1 && in_path == NULL)
+	{
+		err_msg(2, *cmd_count, argv[0], token_array[0], "not found");
+		free_array_tokens(token_array);
+		if (*mode != 1)
+			exit(127);
+		errno = 127;
+		return; /*Error Status for when path not found*/
 	}
 
 	/*Handling PATH for command run anywhere*/

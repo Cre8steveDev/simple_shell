@@ -24,6 +24,10 @@ typedef struct Built_in
 	void (*fnc_cmd)(char **argv, char **env, char **token_array);
 } Built_in;
 
+/*digits and atoi*/
+int _atoi(char *s);
+int _isdigit(int c);
+
 /* Builtin functions handler */
 
 void env_func(char **argv, char **env, char **token_array);
@@ -52,6 +56,7 @@ int status;
 /*User-defined Prototypes*/
 char *get_path(char **env);
 char **split_path(char *path_var);
+char *find_str_in_path(char *cmd, char *path);
 char **split_user_input(char *user_input);
 void handle_signal(int signum);
 int handle_builtins(char **argv, char **env, char **token_array);
