@@ -8,8 +8,6 @@
  * @mode: Keeps track of the mode interactive or not
  * Return: Void
  */
-
-/**SUBJECT TO MODIFICATION IN NON-INTERACTIVE MODE*/
 void handle_interactions(char **argv, char **env, int *cmd_count, int *mode)
 {
 	char **token_array = process_input(argv, mode), *in_path = NULL;

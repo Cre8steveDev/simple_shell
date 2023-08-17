@@ -38,12 +38,8 @@ void exit_func(char **argv, char **env, char **token_array);
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-char *_strncat(char *dest, char *src, int n);
 char *_strcat(char *dest, char *src);
-char *_strncpy(char *dest, char *src, int n);
-char *_strchr(char *s, char c);
 char *_strstr(char *haystack, char *needle);
-char *str_concat(char *s1, char *s2);
 char *_strdup(char *str);
 
 /*Memory Allocation Prototypes*/
@@ -63,6 +59,8 @@ int handle_builtins(char **argv, char **env, char **token_array);
 int handle_PATH(char **argv, char **env, char **token_array, int *cmd_count);
 void handle_full_Path(char **token_array, char **env, char **argv, int mode);
 void err_msg(int fd, int num_cmd, char *s1, char *s2, char *s3);
+
+/*SPECIAL CASE HANDLER FOR TASK 3*/
 int handle_missing_path27(char *in_path, char **token_array,
 						  char **env, int *mode, int *cmd_count, char **argv);
 
