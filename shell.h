@@ -27,7 +27,7 @@ typedef struct Built_in
 /*digits and atoi*/
 int _atoi(char *s);
 int _isdigit(int c);
-extern char **environ;
+/*extern char **environ;*/
 /* Builtin functions handler */
 
 void env_func(char **argv, char **env, char **token_array);
