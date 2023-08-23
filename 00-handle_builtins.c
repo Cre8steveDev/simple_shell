@@ -88,11 +88,29 @@ void exit_func(char **argv, char **env, char **token_array)
 
 void cd_func(char **argv, char **env, char **token_array)
 {
-	(void)argv;
-	(void)env;
-	(void)token_array;
+	char *dir = NULL;
+	size_t size = 0;
+	char *old_pwd = getenv("OLDPWD");
 
-	printf("cd pressed\n");
+	(void)env;
+
+	if (token_array[1] != NULL)
+	{
+		if (token_array[1][0] == '-')
+		{
+			chdir(old_pwd);
+		}
+		else if (chdir(token_array[1]) == -1)
+		{
+			err_msg(2, cmd_count, argv[0], "can't cd to", token_array[1]);
+		}
+		return;
+	}
+	if (chdir(getcwd(dir, size)) == -1)
+	{
+		err_msg(2, cmd_count, argv[0], "can't cd to", token_array[0]);
+	}
+	free(dir); /*Causing mem leak*/
 }
 
 /**

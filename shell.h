@@ -48,6 +48,7 @@ void free_array_tokens(char **array_tokens);
 
 /*Global status*/
 int status;
+int cmd_count;
 
 /*User-defined Prototypes*/
 char *get_path(char **env);

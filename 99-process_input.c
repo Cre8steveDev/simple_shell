@@ -27,17 +27,19 @@ char **process_input(char **argv, int *mode)
 	}
 	while (user_string[i])
 	{
+		if (user_string[0] != '#' && user_string[i] ==
+				'#' && user_string[i - 1] != ' ')
+			break;
+
 		if (user_string[i] == '#')
 			user_string[i] = '\0';
 		i++;
 	}
-
 	token_array = split_user_input(user_string);
 	/*Modify split_user function to free token array when it fails*/
 	if (token_array == NULL)
 	{
-		free(user_string);
-		free_array_tokens(token_array);
+		free(user_string), free_array_tokens(token_array);
 		perror(argv[0]);
 		exit(EXIT_FAILURE);
 	}

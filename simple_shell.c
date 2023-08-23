@@ -16,9 +16,9 @@ int main(int argc, char **argv, char **env)
 	 * the variable here at every call
 	 * int cmd_count = 0;
 	 */
-	int cmd_count = 1;
 	int mode = 0;
 
+	cmd_count = 1;
 	(void)argc;
 
 	if (isatty(0) == 1)
